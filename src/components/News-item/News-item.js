@@ -1,6 +1,5 @@
 import React from 'react';
 import './News-item.css';
-import cat from '../../assets/images/cat.jpeg'
 
 
 export function NewsItem({title, text, image, link}){
