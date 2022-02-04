@@ -4,14 +4,18 @@ import { useParams } from "react-router-dom";
 
 import { NewsContainer } from "../components/News-container/News-container";
 
-export function News() {
+export function News({ order }) {
   const [news, setNews] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentpage, setCurrentPage] = useState(1);
   const { id } = useParams();
-  const apiUrl = `https://content.guardianapis.com/search?q=${id}&page-size=10&show-fields=all&order-by=relevance&page=${currentpage}&api-key=5ef33414-1934-47dc-9892-5d09ab7c00da`;
+  const apiUrl = `https://content.guardianapis.com/search?q=${
+    id || "trending"
+  }&page-size=10&show-fields=all&order-by=${
+    order || "relevance"
+  }&page=${currentpage}&api-key=5ef33414-1934-47dc-9892-5d09ab7c00da`;
 
-  //   Lazy loader
+  //   Unfinite block
   useEffect(() => {
     if (isLoading) {
       axios
@@ -22,7 +26,6 @@ export function News() {
         })
         .finally(() => {
           setIsLoading(false);
-          console.log("fetch");
         });
     }
   }, [isLoading]);
@@ -30,11 +33,10 @@ export function News() {
   //   initial load
   useEffect(() => {
     setCurrentPage(1);
-
     axios.get(apiUrl).then((resp) => {
       setNews([...resp.data.response.results]);
     });
-  }, [id]);
+  }, [id, order]);
 
   // handle scroll
   const scrollHandler = (e) => {
@@ -43,7 +45,6 @@ export function News() {
         (e.target.documentElement.scrollTop + window.innerHeight) <
       100
     ) {
-      console.log(id);
       setIsLoading(true);
     }
   };

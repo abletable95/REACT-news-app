@@ -1,19 +1,23 @@
 import "./App.css";
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import React, { useState } from "react";
 
-import {News} from "./pages/News";
+import { News } from "./pages/News";
 import { Header } from "./components/Header/Header";
 
 function App() {
-  
+  const [postsOrder, setPostsOrder] = useState();
+  const getOrder = (order) => {
+    setPostsOrder(order);
+  };
+
   return (
     <div className="App">
-      <Header />
-      
+      <Header currentOrder={getOrder} />
       <Routes>
-        <Route path="/news/:id" element={<News/>}/>
+        <Route path="/" element={<News order={postsOrder} />} />
+        <Route path="/:id" element={<News order={postsOrder} />} />
       </Routes>
-      
     </div>
   );
 }
