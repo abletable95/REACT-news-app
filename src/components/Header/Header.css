@@ -1,8 +1,26 @@
+header {
+  background-color: #282c34;
+}
 
-.App-header {
-    background-color: #282c34;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-  }
+.headerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+}
+
+.navigation{
+
+}
+header a {
+  color: aliceblue;
+  margin-left: 15px;
+  text-decoration: none;
+}
+header a:hover {
+  color: rgb(0, 146, 146);
+}
+
+.activeLink {
+  color: rgb(0, 146, 146);
+}
