@@ -1,0 +1,16 @@
+{
+    "translation":{
+        "nav":{
+            "order":"Order By",
+            "relevance":"relevance",
+            "newest":"newest",
+            "oldest":"oldest",
+            "trending":"Trending",
+            "sport":"Sport",
+            "health":"Health"
+        },
+        "news":{
+            "readMore":"Read more..."
+        }
+   }
+}

@@ -1,19 +1,25 @@
 header {
   background-color: #282c34;
+  position: relative;
 }
 
 .headerInner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
-.navigation{
-
+select{
+  margin-left: 10px;
+  padding: 10px ; 
+  width: 150px;
+  border: 1px solid #aaa;
+ box-shadow: 0 1px 0 1px rgba(0,0,0,.04); 
+border-radius: 10px;
 }
 header a {
-  color: aliceblue;
+  color: rgb(255, 255, 255);
   margin-left: 15px;
   text-decoration: none;
 }
@@ -22,5 +28,24 @@ header a:hover {
 }
 
 .activeLink {
+  color: rgb(0, 146, 146);
+}
+
+.langs {
+  position: fixed;
+  right: 50px;
+  bottom: 20px;
+}
+
+.langs button{
+  width: 60px;
+  height: 30px;
+  font-size: 18px;
+  border-radius: 10px;
+  color: white;
+  background-color: #282c34;
+}
+
+.activeLang{
   color: rgb(0, 146, 146);
 }

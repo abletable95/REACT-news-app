@@ -1,5 +1,7 @@
 import React from "react";
+import { Suspense } from "react/cjs/react.production.min";
 import ReactDOM from "react-dom";
+import "./i18n/config";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
@@ -7,9 +9,11 @@ import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Suspense fallback="Loading...">
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Suspense>
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -1,7 +1,9 @@
 import React from "react";
 import "./News-item.css";
+import { useTranslation } from "react-i18next";
 
 export function NewsItem({ title, text, image, link }) {
+  const { t } = useTranslation();
   return (
     <div className="newsItem">
       <h2>{title}</h2>
@@ -9,7 +11,7 @@ export function NewsItem({ title, text, image, link }) {
         <img src={image} alt="article image" />
       </div>
       <p>{text}...</p>
-      <a href={link}>Read more</a>
+      <a href={link}>{t("news.readMore")}</a>
     </div>
   );
 }
