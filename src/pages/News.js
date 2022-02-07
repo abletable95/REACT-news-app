@@ -9,34 +9,44 @@ export function News({ order }) {
   const [isLoading, setIsLoading] = useState(false);
   const [currentpage, setCurrentPage] = useState(1);
   const { id } = useParams();
-  const apiUrl = `https://content.guardianapis.com/search?q=${
-    id || "trending"
-  }&page-size=10&show-fields=all&order-by=${
-    order || "relevance"
-  }&page=${currentpage}&api-key=5ef33414-1934-47dc-9892-5d09ab7c00da`;
+
+  const apiUrl = `https://content.guardianapis.com/search?`;
+
+  //   initial load
+
+  useEffect(() => {
+    setCurrentPage(1);
+    axios
+      .get(
+        `${apiUrl}q=${id || "trending"}&page-size=10&show-fields=all&order-by=${
+          order || "relevance"
+        }&page=1&api-key=5ef33414-1934-47dc-9892-5d09ab7c00da`
+      )
+      .then((resp) => {
+        setNews([...resp.data.response.results]);
+      });
+  }, [id, order]);
 
   //   Unfinite block
+
   useEffect(() => {
     if (isLoading) {
       axios
-        .get(apiUrl)
+        .get(
+          `${apiUrl}q=${
+            id || "trending"
+          }&page-size=10&show-fields=all&order-by=${
+            order || "relevance"
+          }&page=${currentpage}&api-key=5ef33414-1934-47dc-9892-5d09ab7c00da`
+        )
         .then((resp) => {
           setNews([...news, ...resp.data.response.results]);
-          setCurrentPage((prev) => prev + 1);
         })
         .finally(() => {
           setIsLoading(false);
         });
     }
-  }, [isLoading]);
-
-  //   initial load
-  useEffect(() => {
-    setCurrentPage(1);
-    axios.get(apiUrl).then((resp) => {
-      setNews([...resp.data.response.results]);
-    });
-  }, [id, order]);
+  }, [currentpage]);
 
   // handle scroll
   const scrollHandler = (e) => {
@@ -51,6 +61,7 @@ export function News({ order }) {
 
   useEffect(() => {
     document.addEventListener("scroll", scrollHandler);
+    if (isLoading) setCurrentPage((prev) => prev + 1);
     return function () {
       document.removeEventListener("scroll", scrollHandler);
     };
