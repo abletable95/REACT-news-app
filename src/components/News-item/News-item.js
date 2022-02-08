@@ -1,18 +1,19 @@
 import React from "react";
 import "./News-item.css";
 import { useTranslation } from "react-i18next";
+import { Card } from "antd";
 
 export function NewsItem({ title, text, image, link }) {
   const { t } = useTranslation();
+  const { Meta } = Card;
+
   return (
-    <div className="newsItem">
-      <h2>{title}</h2>
-      <div className="imageWrap">
-        <img src={image} alt="article image" />
-      </div>
-      <p>{text}...</p>
-      <a href={link}>{t("news.readMore")}</a>
-    </div>
+    <>
+      <Card cover={<img src={image} alt="article image"/>}>
+        <Meta title={title} description={`${text}...`} />
+        <a href={link}>{t("news.readMore")}</a>
+      </Card>
+    </>
   );
 }
 

@@ -3,4 +3,7 @@
     margin: 0 auto;
     background-color: rgb(212, 212, 212);
     padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
